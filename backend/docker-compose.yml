@@ -11,10 +11,12 @@ services:
 
     environment:
       ORACLE_PASSWORD: oracle
+      APP_USER: boleia
+      APP_USER_PASSWORD: boleia
 
     volumes:
       - oracle-data:/opt/oracle/oradata
-      - ./database:/docker-entrypoint-initdb.d
+      - ./database/scripts_sql:/docker-entrypoint-initdb.d
 
     networks:
       - backend-network
