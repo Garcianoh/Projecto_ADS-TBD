@@ -9,10 +9,12 @@
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/RegistarRequest.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/UtenteLoginData.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/CategoriaInvalidaException.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/ContaBloqueadaException.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/CredenciaisInvalidasException.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/CursoObrigatorioException.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/EmailJaExisteException.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/GlobalExceptionHandler.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/NickJaExisteException.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/repository/AuthRepository.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/repository/JdbcAuthRepository.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/service/AuthService.java

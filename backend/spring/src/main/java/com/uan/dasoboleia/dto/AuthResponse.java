@@ -11,6 +11,6 @@ import lombok.Getter;
 public class AuthResponse {
     
     private final String token;
-    private final String email;
+    private final String nick;
     private final String categoria;
 }

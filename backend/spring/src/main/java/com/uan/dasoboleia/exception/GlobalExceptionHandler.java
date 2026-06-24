@@ -34,6 +34,16 @@ public class GlobalExceptionHandler {
         return construirResposta(HttpStatus.UNAUTHORIZED, ex.getMessage());
     }
 
+    @ExceptionHandler(NickJaExisteException.class)
+    public ResponseEntity<Map<String, Object>> tratarNickJaExiste(NickJaExisteException ex) {
+        return construirResposta(HttpStatus.CONFLICT, ex.getMessage());
+    }
+
+    @ExceptionHandler(ContaBloqueadaException.class)
+    public ResponseEntity<Map<String, Object>> tratarContaBloqueada(ContaBloqueadaException ex) {
+        return construirResposta(HttpStatus.LOCKED, ex.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> tratarErrosValidacao(MethodArgumentNotValidException ex) {
         Map<String, String> erros = new LinkedHashMap<>();

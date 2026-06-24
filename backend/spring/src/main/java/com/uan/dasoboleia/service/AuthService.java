@@ -4,6 +4,7 @@ import com.uan.dasoboleia.dto.AuthResponse;
 import com.uan.dasoboleia.dto.LoginRequest;
 import com.uan.dasoboleia.dto.RegistarRequest;
 import com.uan.dasoboleia.dto.UtenteLoginData;
+import com.uan.dasoboleia.exception.ContaBloqueadaException;
 import com.uan.dasoboleia.exception.CredenciaisInvalidasException;
 import com.uan.dasoboleia.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,7 @@ public class AuthService {
         Long idUtente = authRepository.registarUtente(
                 request.getNome(),
                 request.getApelido(),
+                request.getNick(),
                 request.getNumeroUtente(),
                 request.getEmail(),
                 passwordHash,
@@ -41,32 +43,50 @@ public class AuthService {
                 request.getCurso()
         );
 
-        String token = jwtTokenGenerator.gerar(idUtente, request.getEmail(), request.getCategoria());
+        String token = jwtTokenGenerator.gerar(
+                idUtente,
+                request.getNick(),
+                request.getCategoria(),
+                request.getEmail()
+        );
 
-        return new AuthResponse(token, request.getEmail(), request.getCategoria());
+        return new AuthResponse(token, request.getNick(), request.getCategoria());
     }
 
     public AuthResponse login(LoginRequest request) {
-        UtenteLoginData dadosUtente = buscarUtenteOuFalhar(request.getEmail());
+        UtenteLoginData dadosUtente = buscarUtenteOuFalhar(request.getNick());
 
-        validarPassword(request.getPassword(), dadosUtente.getPasswordHash());
+        validarContaNaoBloqueada(dadosUtente);
+        validarPasswordOuRegistarFalha(request, dadosUtente);
+
+        authRepository.resetarTentativas(dadosUtente.getIdUtente());
 
         String token = jwtTokenGenerator.gerar(
                 dadosUtente.getIdUtente(),
-                request.getEmail(),
-                dadosUtente.getCategoria()
+                request.getNick(),
+                dadosUtente.getCategoria(),
+                dadosUtente.getEmail()
         );
 
-        return new AuthResponse(token, request.getEmail(), dadosUtente.getCategoria());
+        return new AuthResponse(token, request.getNick(), dadosUtente.getCategoria());
     }
 
-    private UtenteLoginData buscarUtenteOuFalhar(String email) {
-        Optional<UtenteLoginData> dadosUtente = authRepository.buscarParaLogin(email);
+    private UtenteLoginData buscarUtenteOuFalhar(String nick) {
+        Optional<UtenteLoginData> dadosUtente = authRepository.buscarParaLogin(nick);
         return dadosUtente.orElseThrow(CredenciaisInvalidasException::new);
     }
 
-    private void validarPassword(String passwordTextoPuro, String passwordHash) {
-        if (!passwordEncoder.matches(passwordTextoPuro, passwordHash)) {
+    private void validarContaNaoBloqueada(UtenteLoginData dadosUtente) {
+        if (dadosUtente.isBloqueado()) {
+            throw new ContaBloqueadaException(dadosUtente.getMinutosRestantes());
+        }
+    }
+
+    private void validarPasswordOuRegistarFalha(LoginRequest request, UtenteLoginData dadosUtente) {
+        boolean passwordCorreta = passwordEncoder.matches(request.getPassword(), dadosUtente.getPasswordHash());
+
+        if (!passwordCorreta) {
+            authRepository.registarTentativaFalhada(request.getNick());
             throw new CredenciaisInvalidasException();
         }
     }

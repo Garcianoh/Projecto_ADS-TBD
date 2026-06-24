@@ -10,17 +10,14 @@ import java.util.Optional;
  */
 public interface AuthRepository {
 
-    /**
-     * Verifica se já existe um utente registado com o email fornecido.
-     */
     boolean emailExiste(String email);
 
-    /**
-     * Regista um novo utente através da procedure PL/SQL e devolve o id gerado.
-     */
+    boolean nickExiste(String nick);
+
     Long registarUtente(
             String nome,
             String apelido,
+            String nick,
             String numeroUtente,
             String email,
             String passwordHash,
@@ -29,8 +26,12 @@ public interface AuthRepository {
     );
 
     /**
-     * Busca os dados necessários para validar o login de um utente pelo email.
-     * Devolve vazio se o email não existir.
+     * Busca os dados necessários para validar o login de um utente pelo nick.
+     * Devolve vazio se o nick não existir.
      */
-    Optional<UtenteLoginData> buscarParaLogin(String email);
+    Optional<UtenteLoginData> buscarParaLogin(String nick);
+
+    void registarTentativaFalhada(String nick);
+
+    void resetarTentativas(Long idUtente);
 }

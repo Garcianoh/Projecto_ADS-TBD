@@ -14,4 +14,7 @@ public class UtenteLoginData {
     private final Long idUtente;
     private final String passwordHash;
     private final String categoria;
+    private final String email;
+    private final boolean bloqueado;
+    private final int minutosRestantes;
 }

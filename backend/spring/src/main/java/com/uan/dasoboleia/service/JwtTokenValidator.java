@@ -11,12 +11,11 @@ import java.util.Date;
 @Component
 @RequiredArgsConstructor
 public class JwtTokenValidator {
-    
     private final JwtTokenParser jwtTokenParser;
 
-    public boolean isValido(String token, String email) {
-        String emailExtraido = jwtTokenParser.extrairEmail(token);
-        return emailExtraido.equals(email) && !isExpirado(token);
+    public boolean isValido(String token, String nick) {
+        String nickExtraido = jwtTokenParser.extrairNick(token);
+        return nickExtraido.equals(nick) && !isExpirado(token);
     }
 
     private boolean isExpirado(String token) {

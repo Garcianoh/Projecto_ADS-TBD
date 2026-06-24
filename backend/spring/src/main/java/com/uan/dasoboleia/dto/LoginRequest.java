@@ -1,6 +1,5 @@
 package com.uan.dasoboleia.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,9 +15,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LoginRequest {
     
-    @NotBlank(message = "O email é obrigatório")
-    @Email(message = "O email deve ter um formato válido")
-    private String email;
+    @NotBlank(message = "O pseudónimo (nick) é obrigatório")
+    private String nick;
 
     @NotBlank(message = "A password é obrigatória")
     private String password;

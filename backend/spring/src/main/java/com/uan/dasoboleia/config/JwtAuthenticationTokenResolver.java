@@ -19,13 +19,13 @@ public class JwtAuthenticationTokenResolver implements AuthenticationTokenResolv
 
     @Override
     public Authentication resolve(String token) {
-        String email = jwtTokenParser.extrairEmail(token);
+        String nick = jwtTokenParser.extrairNick(token);
         String categoria = jwtTokenParser.extrairCategoria(token);
 
         List<SimpleGrantedAuthority> authorities = List.of(
                 new SimpleGrantedAuthority(ROLE_PREFIX + categoria.toUpperCase())
         );
 
-        return new UsernamePasswordAuthenticationToken(email, null, authorities);
+        return new UsernamePasswordAuthenticationToken(nick, null, authorities);
     }
 }

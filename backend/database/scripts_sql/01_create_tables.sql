@@ -26,14 +26,17 @@ CREATE TABLE utente (
     id_utente     NUMBER GENERATED ALWAYS AS IDENTITY,
     nome          VARCHAR2(150) NOT NULL,
     apelido       VARCHAR2(150) NOT NULL,
+    nick          VARCHAR2(50)  NOT NULL,
     numero_utente VARCHAR2(50)  NOT NULL,
     email         VARCHAR2(150) NOT NULL,
     password      VARCHAR2(150) NOT NULL,
+    foto_url      VARCHAR2(500),
     timestamp     TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
     id_categoria  NUMBER        NOT NULL,
     CONSTRAINT Pk_utente PRIMARY KEY (id_utente),
     CONSTRAINT Uq_utente_numero UNIQUE (numero_utente),
     CONSTRAINT Uq_utente_email  UNIQUE (email),
+    CONSTRAINT Uq_utente_nick   UNIQUE (nick),
     CONSTRAINT Fk_utente_categoria FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
 );
 

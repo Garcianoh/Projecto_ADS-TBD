@@ -22,6 +22,10 @@ public class RegistarRequest {
     @NotBlank(message = "O apelido é obrigatório")
     private String apelido;
 
+    @NotBlank(message = "O pseudónimo (nick) é obrigatório")
+    @Size(min = 3, max = 50, message = "O nick deve ter entre 3 e 50 caracteres")
+    private String nick;
+
     @NotBlank(message = "O número de utente é obrigatório")
     private String numeroUtente;
 

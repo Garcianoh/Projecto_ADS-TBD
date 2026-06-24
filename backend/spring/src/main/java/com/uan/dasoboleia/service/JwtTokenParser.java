@@ -17,11 +17,12 @@ public class JwtTokenParser {
     
     private static final String CLAIM_ID_UTENTE = "id_utente";
     private static final String CLAIM_CATEGORIA = "categoria";
+    private static final String CLAIM_EMAIL = "email";
 
     @Value("${jwt.secret}")
     private String secret;
 
-    public String extrairEmail(String token) {
+    public String extrairNick(String token) {
         return extrairClaim(token, Claims::getSubject);
     }
 
@@ -31,6 +32,10 @@ public class JwtTokenParser {
 
     public String extrairCategoria(String token) {
         return extrairTodasClaims(token).get(CLAIM_CATEGORIA, String.class);
+    }
+
+    public String extrairEmail(String token) {
+        return extrairTodasClaims(token).get(CLAIM_EMAIL, String.class);
     }
 
     public Date extrairExpiracao(String token) {

@@ -18,6 +18,8 @@ public class JwtTokenGenerator {
     
     private static final String CLAIM_ID_UTENTE = "id_utente";
     private static final String CLAIM_CATEGORIA = "categoria";
+    private static final String CLAIM_EMAIL = "email";
+
 
     @Value("${jwt.secret}")
     private String secret;
@@ -25,17 +27,18 @@ public class JwtTokenGenerator {
     @Value("${jwt.expiration}")
     private long expirationMs;
 
-    public String gerar(Long idUtente, String email, String categoria) {
+    public String gerar(Long idUtente, String nick, String categoria, String email) {
         Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_ID_UTENTE, idUtente);
         claims.put(CLAIM_CATEGORIA, categoria);
+        claims.put(CLAIM_EMAIL, email);
 
         Date agora = new Date();
         Date expiracao = new Date(agora.getTime() + expirationMs);
 
         return Jwts.builder()
                 .claims(claims)
-                .subject(email)
+                .subject(nick)
                 .issuedAt(agora)
                 .expiration(expiracao)
                 .signWith(getSigningKey())

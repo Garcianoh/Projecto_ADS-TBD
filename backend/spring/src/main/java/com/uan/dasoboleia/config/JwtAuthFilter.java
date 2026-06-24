@@ -56,9 +56,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private void autenticar(String token) {
         try {
-            String email = jwtTokenParser.extrairEmail(token);
+            String nick = jwtTokenParser.extrairNick(token);
 
-            if (jwtTokenValidator.isValido(token, email)) {
+            if (jwtTokenValidator.isValido(token, nick)) {
                 Authentication authentication = authenticationTokenResolver.resolve(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
