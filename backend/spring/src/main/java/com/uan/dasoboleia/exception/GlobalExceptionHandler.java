@@ -44,6 +44,11 @@ public class GlobalExceptionHandler {
         return construirResposta(HttpStatus.LOCKED, ex.getMessage());
     }
 
+    @ExceptionHandler(CodigoInvalidoException.class)
+    public ResponseEntity<Map<String, Object>> tratarCodigoInvalido(CodigoInvalidoException ex) {
+        return construirResposta(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> tratarErrosValidacao(MethodArgumentNotValidException ex) {
         Map<String, String> erros = new LinkedHashMap<>();

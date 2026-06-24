@@ -1,6 +1,7 @@
 package com.uan.dasoboleia.repository;
 
 import com.uan.dasoboleia.dto.UtenteLoginData;
+import com.uan.dasoboleia.dto.CodigoRecuperacaoData;
 
 import java.util.Optional;
 
@@ -34,4 +35,14 @@ public interface AuthRepository {
     void registarTentativaFalhada(String nick);
 
     void resetarTentativas(Long idUtente);
+
+    /**
+     * Gera um código de recuperação para o email fornecido.
+     * Devolve vazio se o email não existir (não revela existência).
+     */
+    Optional<CodigoRecuperacaoData> gerarCodigoRecuperacao(String email);
+
+    boolean validarCodigoRecuperacao(String email, String codigo);
+
+    void redefinirPassword(String email, String novoPasswordHash);
 }

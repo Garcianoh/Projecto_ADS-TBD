@@ -1,5 +1,6 @@
 package com.uan.dasoboleia.repository;
 
+import com.uan.dasoboleia.dto.CodigoRecuperacaoData;
 import com.uan.dasoboleia.dto.UtenteLoginData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.SqlOutParameter;
@@ -24,6 +25,9 @@ public class JdbcAuthRepository implements AuthRepository {
     private static final String PR_BUSCAR_UTENTE_LOGIN = "PR_BUSCAR_UTENTE_LOGIN";
     private static final String PR_REGISTAR_TENTATIVA_FALHADA = "PR_REGISTAR_TENTATIVA_FALHADA";
     private static final String PR_RESETAR_TENTATIVAS = "PR_RESETAR_TENTATIVAS";
+    private static final String PR_GERAR_CODIGO_RECUPERACAO = "PR_GERAR_CODIGO_RECUPERACAO";
+    private static final String PR_VALIDAR_CODIGO_RECUPERACAO = "PR_VALIDAR_CODIGO_RECUPERACAO";
+    private static final String PR_REDEFINIR_PASSWORD = "PR_REDEFINIR_PASSWORD";
 
     private final DataSource dataSource;
 
@@ -139,5 +143,62 @@ public class JdbcAuthRepository implements AuthRepository {
                 .withProcedureName(PR_RESETAR_TENTATIVAS);
 
         call.execute(new MapSqlParameterSource().addValue("p_id_utente", idUtente));
+    }
+    
+    @Override
+    public Optional<CodigoRecuperacaoData> gerarCodigoRecuperacao(String email) {
+        SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
+                .withCatalogName(PACKAGE_AUTENTICACAO)
+                .withProcedureName(PR_GERAR_CODIGO_RECUPERACAO)
+                .declareParameters(
+                        new SqlOutParameter("p_codigo_out", Types.VARCHAR),
+                        new SqlOutParameter("p_nome_out", Types.VARCHAR)
+                );
+
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("p_email", email);
+
+        Map<String, Object> resultado = call.execute(params);
+
+        String codigo = (String) resultado.get("p_codigo_out");
+        String nome = (String) resultado.get("p_nome_out");
+
+        if (codigo == null) {
+                return Optional.empty();
+        }
+
+        return Optional.of(new CodigoRecuperacaoData(codigo, nome));
+    }
+
+    @Override
+    public boolean validarCodigoRecuperacao(String email, String codigo) {
+        SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
+                .withCatalogName(PACKAGE_AUTENTICACAO)
+                .withProcedureName(PR_VALIDAR_CODIGO_RECUPERACAO)
+                .declareParameters(
+                        new SqlOutParameter("p_valido_out", Types.NUMERIC)
+                );
+
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("p_email", email)
+                .addValue("p_codigo", codigo);
+
+        Map<String, Object> resultado = call.execute(params);
+
+        Number valido = (Number) resultado.get("p_valido_out");
+        return valido.intValue() == 1;
+    }
+
+    @Override
+    public void redefinirPassword(String email, String novoPasswordHash) {
+        SimpleJdbcCall call = new SimpleJdbcCall(dataSource)
+                .withCatalogName(PACKAGE_AUTENTICACAO)
+                .withProcedureName(PR_REDEFINIR_PASSWORD);
+
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("p_email", email)
+                .addValue("p_password_hash_novo", novoPasswordHash);
+
+        call.execute(params);
     }
 }
