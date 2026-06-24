@@ -38,6 +38,10 @@ services:
       SPRING_DATASOURCE_URL: jdbc:oracle:thin:@oracle-db:1521/FREEPDB1
       SPRING_DATASOURCE_USERNAME: system
       SPRING_DATASOURCE_PASSWORD: oracle
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: 86400000
+      BREVO_SMTP_USERNAME: ${BREVO_SMTP_USERNAME}
+      BREVO_SMTP_PASSWORD: ${BREVO_SMTP_PASSWORD}
 
     networks:
       - backend-network

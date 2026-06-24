@@ -3,9 +3,9 @@ spring:
     name: boleia
 
   datasource:
-    url: jdbc:oracle:thin:@oracle-db:1521/FREEPDB1
-    username: system
-    password: oracle
+    url: ${SPRING_DATASOURCE_URL:jdbc:oracle:thin:@oracle-db:1521/FREEPDB1}
+    username: ${SPRING_DATASOURCE_USERNAME:system}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: oracle.jdbc.OracleDriver
 
   jpa:
@@ -16,9 +16,21 @@ spring:
       hibernate:
         format_sql: true
 
+  mail:
+    host: smtp-relay.brevo.com
+    port: 587
+    username: ${BREVO_SMTP_USERNAME}
+    password: ${BREVO_SMTP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 jwt:
-  secret: troca-esta-chave-por-uma-bem-grande-e-aleatoria-depois
-  expiration: 86400000   # 24 horas em milissegundos
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION:86400000}
 
 server:
   port: 8080
