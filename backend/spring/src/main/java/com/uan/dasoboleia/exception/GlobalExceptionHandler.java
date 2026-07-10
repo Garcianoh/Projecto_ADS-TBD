@@ -49,6 +49,16 @@ public class GlobalExceptionHandler {
         return construirResposta(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
+    @ExceptionHandler(UtenteNaoEncontradoException.class)
+    public ResponseEntity<Map<String, Object>> tratarUtenteNaoEncontrado(UtenteNaoEncontradoException ex) {
+        return construirResposta(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    @ExceptionHandler(FotoInvalidaException.class)
+    public ResponseEntity<Map<String, Object>> tratarFotoInvalida(FotoInvalidaException ex) {
+        return construirResposta(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> tratarErrosValidacao(MethodArgumentNotValidException ex) {
         Map<String, String> erros = new LinkedHashMap<>();

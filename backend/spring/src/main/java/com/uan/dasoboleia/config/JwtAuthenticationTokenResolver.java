@@ -21,11 +21,17 @@ public class JwtAuthenticationTokenResolver implements AuthenticationTokenResolv
     public Authentication resolve(String token) {
         String nick = jwtTokenParser.extrairNick(token);
         String categoria = jwtTokenParser.extrairCategoria(token);
+        Long idUtente = jwtTokenParser.extrairIdUtente(token);
 
         List<SimpleGrantedAuthority> authorities = List.of(
                 new SimpleGrantedAuthority(ROLE_PREFIX + categoria.toUpperCase())
         );
 
-        return new UsernamePasswordAuthenticationToken(nick, null, authorities);
+        UsernamePasswordAuthenticationToken authentication =
+                new UsernamePasswordAuthenticationToken(nick, null, authorities);
+
+        authentication.setDetails(idUtente);
+
+        return authentication;
     }
 }

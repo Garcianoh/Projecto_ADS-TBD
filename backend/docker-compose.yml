@@ -43,6 +43,9 @@ services:
       BREVO_SMTP_USERNAME: ${BREVO_SMTP_USERNAME}
       BREVO_SMTP_PASSWORD: ${BREVO_SMTP_PASSWORD}
 
+    volumes:
+      - uploads-data:/app/uploads
+
     networks:
       - backend-network
 
@@ -51,3 +54,4 @@ networks:
 
 volumes:
   oracle-data:
+  uploads-data:
