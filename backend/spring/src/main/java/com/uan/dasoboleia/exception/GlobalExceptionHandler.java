@@ -75,6 +75,22 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(corpo);
     }
 
+    @ExceptionHandler(MatriculaJaExisteException.class)
+    public ResponseEntity<Map<String, Object>> tratarMatriculaJaExiste(MatriculaJaExisteException ex) {
+        return construirResposta(HttpStatus.CONFLICT, ex.getMessage());
+    }
+
+    @ExceptionHandler(ViaturaInvalidaException.class)
+    public ResponseEntity<Map<String, Object>> tratarViaturaInvalida(ViaturaInvalidaException ex) {
+        return construirResposta(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(ViaturaNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> tratarViaturaNotFound(ViaturaNotFoundException ex) {
+        return construirResposta(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+    
+
     private ResponseEntity<Map<String, Object>> construirResposta(HttpStatus status, String mensagem) {
         Map<String, Object> corpo = new LinkedHashMap<>();
         corpo.put("timestamp", Instant.now());

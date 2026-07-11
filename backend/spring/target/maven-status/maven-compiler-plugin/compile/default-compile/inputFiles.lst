@@ -6,7 +6,9 @@
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/controller/AuthController.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/controller/RecuperarSenhaController.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/controller/UtenteController.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/controller/ViaturaController.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/AtualizarPerfilRequest.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/AtualizarViaturaRequest.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/AuthResponse.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/CodigoRecuperacaoData.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/ConfirmarRecuperacaoRequest.java
@@ -15,8 +17,10 @@
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/MeuPerfilResponse.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/PerfilPublicoResponse.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/RegistarRequest.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/RegistarViaturaRequest.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/SolicitarRecuperacaoRequest.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/UtenteLoginData.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/dto/ViaturaResponse.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/CategoriaInvalidaException.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/CodigoInvalidoException.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/ContaBloqueadaException.java
@@ -25,12 +29,17 @@
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/EmailJaExisteException.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/FotoInvalidaException.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/GlobalExceptionHandler.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/MatriculaJaExisteException.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/NickJaExisteException.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/UtenteNaoEncontradoException.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/ViaturaInvalidaException.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/exception/ViaturaNotFoundException.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/repository/AuthRepository.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/repository/JdbcAuthRepository.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/repository/JdbcUtenteRepository.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/repository/JdbcViaturaRepository.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/repository/UtenteRepository.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/repository/ViaturaRepository.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/service/AuthService.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/service/EmailService.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/service/JwtSigningKeyProvider.java
@@ -42,3 +51,5 @@
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/service/RegistarRequestValidator.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/service/StorageService.java
 /home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/service/UtenteService.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/service/ViaturaRequestValidator.java
+/home/garcianoh/Documentos/Terceiro Ano/ADS/Projeto_ADS_TBD/backend/spring/src/main/java/com/uan/dasoboleia/service/ViaturaService.java

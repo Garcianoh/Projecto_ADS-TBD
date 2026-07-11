@@ -126,3 +126,19 @@ CREATE TABLE utente_boleia (
     CONSTRAINT Fk_ub_utente FOREIGN KEY (id_utente) REFERENCES utente (id_utente),
     CONSTRAINT Fk_ub_boleia FOREIGN KEY (id_boleia) REFERENCES boleia (id_boleia)
 );
+
+CREATE TABLE transacao_pagamento (
+    id_transacao  NUMBER GENERATED ALWAYS AS IDENTITY,
+    id_conta      NUMBER          NOT NULL,
+    valor         NUMBER(15,2)    NOT NULL,
+    referencia    VARCHAR2(50),
+    tipo          VARCHAR2(20)    NOT NULL,
+    estado        VARCHAR2(20)    DEFAULT 'PENDENTE' NOT NULL,
+    timestamp     TIMESTAMP       DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT Pk_transacao         PRIMARY KEY (id_transacao),
+    CONSTRAINT Uq_transacao_ref     UNIQUE (referencia),
+    CONSTRAINT Chk_transacao_valor  CHECK (valor > 0),
+    CONSTRAINT Chk_transacao_tipo   CHECK (tipo IN ('DIRECTO', 'REFERENCIA')),
+    CONSTRAINT Chk_transacao_estado CHECK (estado IN ('PENDENTE', 'CONFIRMADO', 'CANCELADO')),
+    CONSTRAINT Fk_transacao_conta   FOREIGN KEY (id_conta) REFERENCES conta (id_conta)
+);
