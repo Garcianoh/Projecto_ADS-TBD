@@ -89,6 +89,16 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> tratarViaturaNotFound(ViaturaNotFoundException ex) {
         return construirResposta(HttpStatus.NOT_FOUND, ex.getMessage());
     }
+
+    @ExceptionHandler(SaldoInsuficienteException.class)
+    public ResponseEntity<Map<String, Object>> tratarSaldoInsuficiente(SaldoInsuficienteException ex) {
+        return construirResposta(HttpStatus.PAYMENT_REQUIRED, ex.getMessage());
+    }
+
+    @ExceptionHandler(PagamentoInvalidoException.class)
+    public ResponseEntity<Map<String, Object>> tratarPagamentoInvalido(PagamentoInvalidoException ex) {
+        return construirResposta(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
     
 
     private ResponseEntity<Map<String, Object>> construirResposta(HttpStatus status, String mensagem) {

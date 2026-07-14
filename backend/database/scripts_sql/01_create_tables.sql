@@ -98,7 +98,7 @@ CREATE TABLE boleia (
     CONSTRAINT Pk_boleia PRIMARY KEY (id_boleia),
     CONSTRAINT Chk_boleia_custo  CHECK (custo >= 0),
     CONSTRAINT Chk_boleia_tipo   CHECK (tipo_boleia IN ('UNICA', 'DIARIA', 'SEMANAL', 'MENSAL')),
-    CONSTRAINT Chk_boleia_estado CHECK (estado IN ('ATIVO', 'INATIVO')),
+    CONSTRAINT Chk_boleia_estado CHECK (estado IN ('ATIVO', 'INATIVO', 'EM_CURSO', 'CONCLUIDA')),
     CONSTRAINT Fk_boleia_trajeto FOREIGN KEY (id_trajeto) REFERENCES trajeto (id_trajeto)
 );
 

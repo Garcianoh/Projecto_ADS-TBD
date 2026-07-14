@@ -7,9 +7,12 @@ import com.uan.dasoboleia.dto.UtenteLoginData;
 import com.uan.dasoboleia.exception.ContaBloqueadaException;
 import com.uan.dasoboleia.exception.CredenciaisInvalidasException;
 import com.uan.dasoboleia.repository.AuthRepository;
+import com.uan.dasoboleia.repository.UtenteRepository;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -26,8 +29,42 @@ public class AuthService {
     private final RegistarRequestValidator registarRequestValidator;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenGenerator jwtTokenGenerator;
+    private final StorageService storageService;
+    private final UtenteRepository utenteRepository;
 
-    public AuthResponse registar(RegistarRequest request) {
+    public AuthResponse registar(RegistarRequest request, MultipartFile foto) {
+        registarRequestValidator.validar(request);
+
+        String passwordHash = passwordEncoder.encode(request.getPassword());
+
+        Long idUtente = authRepository.registarUtente(
+                request.getNome(),
+                request.getApelido(),
+                request.getNick(),
+                request.getNumeroUtente(),
+                request.getEmail(),
+                passwordHash,
+                request.getCategoria(),
+                request.getCurso()
+        );
+
+        // Upload de foto se fornecida
+        if (foto != null && !foto.isEmpty()) {
+            String fotoUrl = storageService.guardar(foto, idUtente);
+            utenteRepository.atualizarFoto(idUtente, fotoUrl);
+        }
+
+        String token = jwtTokenGenerator.gerar(
+                idUtente,
+                request.getNick(),
+                request.getCategoria(),
+                request.getEmail()
+        );
+
+        return new AuthResponse(token, request.getNick(), request.getCategoria());
+    }
+
+    /*public AuthResponse registar(RegistarRequest request) {
         registarRequestValidator.validar(request);
 
         String passwordHash = passwordEncoder.encode(request.getPassword());
@@ -51,7 +88,7 @@ public class AuthService {
         );
 
         return new AuthResponse(token, request.getNick(), request.getCategoria());
-    }
+    }*/
 
     public AuthResponse login(LoginRequest request) {
         UtenteLoginData dadosUtente = buscarUtenteOuFalhar(request.getNick());
